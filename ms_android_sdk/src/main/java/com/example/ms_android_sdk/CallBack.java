@@ -4,7 +4,7 @@ import com.android.volley.VolleyError;
 
 public interface CallBack {
 
-    void onSuccess(String result);
+    void onSuccess(String response);
 
     void onError(VolleyError error);
 }

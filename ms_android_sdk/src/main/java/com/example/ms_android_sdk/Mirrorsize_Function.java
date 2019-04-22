@@ -22,9 +22,9 @@ import java.util.Map;
 public class Mirrorsize_Function implements SensorEventListener {
 
     private SensorManager sensorManager;
-    public static int angle;
+    public int angle;
 
-    public static void MS_initialize_user(Context context, String apikey, String merchantID, String productname, String producttype, String gender, final CallBack callBack)
+    public void MS_initialize_user(Context context, String apikey, String merchantID, String productname, String producttype, String gender, final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -69,11 +69,12 @@ public class Mirrorsize_Function implements SensorEventListener {
                 }
             };
             // Adding request to request queue
+            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(10000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             Volley.newRequestQueue(context).add(jsonObjReq);
         }
     }
 
-    public static void MS_measurement_Process_loosefit(Context context, String userid, int angle, int height, int weight, int age, String gender, String productname, String username, String usermobile, String apikey,String frontimage, String sideimage, String merchantID, String mobilemodel,final CallBack callBack)
+    public void MS_measurement_Process_loosefit(Context context, String userid, int angle, int height, int weight, int age, String gender, String productname, String username, String usermobile, String apikey,String frontimage, String sideimage, String merchantID, String mobilemodel,final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -129,13 +130,13 @@ public class Mirrorsize_Function implements SensorEventListener {
                 }
             };
             // Adding request to request queue
-            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(120000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(300000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             Volley.newRequestQueue(context).add(jsonObjReq);
         }
 
     }
 
-    public static void MS_measurement_Process_tightfit(Context context, String userid, int angle, int height, String gender, String productname, String username, String usermobile, String apikey,String frontimage, String sideimage, String merchantID, String mobilemodel,final CallBack callBack)
+    public void MS_measurement_Process_tightfit(Context context, String userid, int angle, int height, String gender, String productname, String username, String usermobile, String apikey,String frontimage, String sideimage, String merchantID, String mobilemodel,final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -191,13 +192,13 @@ public class Mirrorsize_Function implements SensorEventListener {
                 }
             };
             // Adding request to request queue
-            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(120000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(300000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             Volley.newRequestQueue(context).add(jsonObjReq);
         }
 
     }
 
-    public static void MS_GetMeasurement(Context context, String apiKey, String apparelName, String brandName, String gender, String merchantID, String productname, String productType, String userID,final CallBack callBack)
+    public void MS_GetMeasurement(Context context, String apiKey, String apparelName, String brandName, String gender, String merchantID, String productname, String productType, String userID,final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -245,12 +246,13 @@ public class Mirrorsize_Function implements SensorEventListener {
                 }
             };
             // Adding request to request queue
+            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(10000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             Volley.newRequestQueue(context).add(jsonObjReq);
         }
 
     }
 
-    public static void MS_Get_Size_Recommendation(Context context, String apiKey, String apparelName, String brandName, String gender,String merchantID, String productname ,String productType,String userID,final CallBack callBack)
+    public void MS_Get_Size_Recommendation(Context context, String apiKey, String apparelName, String brandName, String gender,String merchantID, String productname ,String productType,String userID,final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -298,6 +300,7 @@ public class Mirrorsize_Function implements SensorEventListener {
                 }
             };
             // Adding request to request queue
+            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(10000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             Volley.newRequestQueue(context).add(jsonObjReq);
         }
     }
