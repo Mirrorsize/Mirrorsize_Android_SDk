@@ -198,7 +198,7 @@ public class Mirrorsize_Function implements SensorEventListener {
 
     }
 
-    public void MS_GetMeasurement(Context context, String apiKey, String apparelName, String brandName, String gender, String merchantID, String productname, String productType, String userID,final CallBack callBack)
+    public void MS_GetMeasurement(Context context, String apiKey, String apparelName, String brandName, String gender, String merchantID, String productType, String userID,final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -208,7 +208,7 @@ public class Mirrorsize_Function implements SensorEventListener {
             jsonObject.put("brandName",brandName);
             jsonObject.put("gender",gender);
             jsonObject.put("merchantID",merchantID);
-            jsonObject.put("productname",productname);
+            jsonObject.put("productname","GET_MEASURED");
             jsonObject.put("productType",productType);
             jsonObject.put("userID",userID);
         }
@@ -252,7 +252,7 @@ public class Mirrorsize_Function implements SensorEventListener {
 
     }
 
-    public void MS_Get_Size_Recommendation(Context context, String apiKey, String apparelName, String brandName, String gender,String merchantID, String productname ,String productType,String userID,final CallBack callBack)
+    public void MS_Get_Size_Recommendation(Context context, String apiKey, String apparelName, String brandName, String gender,String merchantID ,String productType,String userID,final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -262,7 +262,7 @@ public class Mirrorsize_Function implements SensorEventListener {
             jsonObject.put("brandName",brandName);
             jsonObject.put("gender",gender);
             jsonObject.put("merchantID",merchantID);
-            jsonObject.put("productname",productname);
+            jsonObject.put("productname","SIZE2FIT");
             jsonObject.put("productType",productType);
             jsonObject.put("userID",userID);
         }
