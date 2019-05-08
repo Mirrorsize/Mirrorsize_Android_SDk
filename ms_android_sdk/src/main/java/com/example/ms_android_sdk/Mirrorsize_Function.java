@@ -21,6 +21,7 @@ import java.util.Map;
 public class Mirrorsize_Function implements SensorEventListener {
 
     private SensorManager sensorManager;
+
     public int angle;
 
     public void MS_initialize_user(Context context, String apikey, String merchantID, String productname, String producttype, String gender, final CallBack callBack)
@@ -315,6 +316,7 @@ public class Mirrorsize_Function implements SensorEventListener {
         sensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
         sensorManager.unregisterListener( Mirrorsize_Function.this,sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER));
     }
+
 
     @Override
     public void onSensorChanged(SensorEvent event) {
