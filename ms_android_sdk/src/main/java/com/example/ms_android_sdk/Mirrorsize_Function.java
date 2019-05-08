@@ -5,7 +5,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -45,8 +44,8 @@ public class Mirrorsize_Function implements SensorEventListener {
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, api, jsonObject, new Response.Listener<JSONObject>()
             {
                 @Override
-                public void onResponse(JSONObject response) {
-
+                public void onResponse(JSONObject response)
+                {
                     callBack.onSuccess(response.toString());
                 }
             }, new Response.ErrorListener()
