@@ -5,7 +5,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -24,14 +23,13 @@ public class Mirrorsize_Function implements SensorEventListener {
     private SensorManager sensorManager;
     public int angle;
 
-    public void MS_initialize_user(Context context, String apikey, String merchantID, String productname, String producttype, String gender, final CallBack callBack)
+    public void MS_initialize_user(Context context, String apikey, String merchantID, String productname, String gender, final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("apiKey",apikey);
             jsonObject.put("merchantid",merchantID);
             jsonObject.put("productname",productname);
-            jsonObject.put("productType",producttype);
             jsonObject.put("gender",gender);
         }
         catch (Exception e)
@@ -41,7 +39,7 @@ public class Mirrorsize_Function implements SensorEventListener {
 
         if (jsonObject.length()>0)
         {
-            String api = "https://mobile.msways.com/api/ms_initialize_user";
+            String api = "https://api.mysize.mirrorsize.com/api/ms_initialize_user";
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, api, jsonObject, new Response.Listener<JSONObject>()
             {
                 @Override
@@ -58,9 +56,6 @@ public class Mirrorsize_Function implements SensorEventListener {
                 }
             })
             {
-                /**
-                 * Passing some request headers
-                 */
                 @Override
                 public Map<String, String> getHeaders() {
                     HashMap<String, String> headers = new HashMap<>();
@@ -68,8 +63,7 @@ public class Mirrorsize_Function implements SensorEventListener {
                     return headers;
                 }
             };
-            // Adding request to request queue
-            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(10000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(60000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             Volley.newRequestQueue(context).add(jsonObjReq);
         }
     }
@@ -101,13 +95,11 @@ public class Mirrorsize_Function implements SensorEventListener {
         }
         if (jsonObject.length() > 0)
         {
-            String api = "https://mobile.msways.com/api/ms_measurement_process";
+            String api = "https://api.mysize.mirrorsize.com/api/ms_measurement_process";
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, api, jsonObject, new Response.Listener<JSONObject>()
             {
                 @Override
                 public void onResponse(JSONObject response) {
-
-
                     callBack.onSuccess(response.toString());
                 }
             }, new Response.ErrorListener()
@@ -119,9 +111,6 @@ public class Mirrorsize_Function implements SensorEventListener {
                 }
             })
             {
-                /**
-                 * Passing some request headers
-                 */
                 @Override
                 public Map<String, String> getHeaders() {
                     HashMap<String, String> headers = new HashMap<>();
@@ -129,22 +118,20 @@ public class Mirrorsize_Function implements SensorEventListener {
                     return headers;
                 }
             };
-            // Adding request to request queue
             jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(300000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             Volley.newRequestQueue(context).add(jsonObjReq);
         }
 
     }
 
-    public void MS_measurement_Process_tightfit(Context context, String userid, int angle, int height, String gender, String productname, String username, String usermobile, String apikey,String frontimage, String sideimage, String merchantID, String mobilemodel,final CallBack callBack)
+    public void MS_measurement_Process_tightfit(Context context, String userid, int angle, int height,int weight, String gender, String productname, String username, String usermobile, String apikey,String frontimage, String sideimage, String merchantID, String mobilemodel,final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
         try {
-
             jsonObject.put("userId",userid);
             jsonObject.put("angle",angle);
             jsonObject.put("height",height);
-            jsonObject.put("weight","75");
+            jsonObject.put("weight",weight);
             jsonObject.put("age","25");
             jsonObject.put("gender",gender);
             jsonObject.put("productname",productname);
@@ -163,13 +150,11 @@ public class Mirrorsize_Function implements SensorEventListener {
         }
         if (jsonObject.length() > 0)
         {
-            String api = "https://mobile.msways.com/api/ms_measurement_process";
+            String api = "https://api.mysize.mirrorsize.com/api/ms_measurement_process";
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, api, jsonObject, new Response.Listener<JSONObject>()
             {
                 @Override
                 public void onResponse(JSONObject response) {
-
-
                     callBack.onSuccess(response.toString());
                 }
             }, new Response.ErrorListener()
@@ -181,9 +166,6 @@ public class Mirrorsize_Function implements SensorEventListener {
                 }
             })
             {
-                /**
-                 * Passing some request headers
-                 */
                 @Override
                 public Map<String, String> getHeaders() {
                     HashMap<String, String> headers = new HashMap<>();
@@ -195,10 +177,9 @@ public class Mirrorsize_Function implements SensorEventListener {
             jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(300000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             Volley.newRequestQueue(context).add(jsonObjReq);
         }
-
     }
 
-    public void MS_GetMeasurement(Context context, String apiKey, String apparelName, String brandName, String gender, String merchantID, String productname, String productType, String userID,final CallBack callBack)
+    public void MS_GetMeasurement(Context context, String apiKey, String apparelName, String brandName, String gender, String merchantID, String userID,final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -207,9 +188,8 @@ public class Mirrorsize_Function implements SensorEventListener {
             jsonObject.put("apparelName",apparelName);
             jsonObject.put("brandName",brandName);
             jsonObject.put("gender",gender);
-            jsonObject.put("merchantID",merchantID);
-            jsonObject.put("productname",productname);
-            jsonObject.put("productType",productType);
+            jsonObject.put("merchantid",merchantID);
+            jsonObject.put("productname","GET_MEASURED");
             jsonObject.put("userID",userID);
         }
         catch (Exception e)
@@ -218,7 +198,7 @@ public class Mirrorsize_Function implements SensorEventListener {
         }
         if (jsonObject.length() > 0)
         {
-            String api = "https://mobile.msways.com/api/ms_getRecommendation";
+            String api = "https://api.mysize.mirrorsize.com/api/ms_getRecommendation";
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, api, jsonObject, new Response.Listener<JSONObject>()
             {
                 @Override
@@ -235,9 +215,6 @@ public class Mirrorsize_Function implements SensorEventListener {
                 }
             })
             {
-                /**
-                 * Passing some request headers
-                 */
                 @Override
                 public Map<String, String> getHeaders() {
                     HashMap<String, String> headers = new HashMap<>();
@@ -246,13 +223,13 @@ public class Mirrorsize_Function implements SensorEventListener {
                 }
             };
             // Adding request to request queue
-            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(10000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(180000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             Volley.newRequestQueue(context).add(jsonObjReq);
         }
 
     }
 
-    public void MS_Get_Size_Recommendation(Context context, String apiKey, String apparelName, String brandName, String gender,String merchantID, String productname ,String productType,String userID,final CallBack callBack)
+    public void MS_Get_Size_Recommendation(Context context, String apiKey, String apparelName, String brandName, String gender,String merchantID, String userID,final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -261,10 +238,9 @@ public class Mirrorsize_Function implements SensorEventListener {
             jsonObject.put("apparelName",apparelName);
             jsonObject.put("brandName",brandName);
             jsonObject.put("gender",gender);
-            jsonObject.put("merchantID",merchantID);
-            jsonObject.put("productname",productname);
-            jsonObject.put("productType",productType);
-            jsonObject.put("userID",userID);
+            jsonObject.put("merchantid",merchantID);
+            jsonObject.put("productname","SIZE2FIT");
+            jsonObject.put("userId",userID);
         }
         catch (Exception e)
         {
@@ -272,7 +248,7 @@ public class Mirrorsize_Function implements SensorEventListener {
         }
         if (jsonObject.length() > 0)
         {
-            String api = "https://mobile.msways.com/api/ms_getRecommendation";
+            String api = "https://api.mysize.mirrorsize.com/api/ms_getRecommendation";
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, api, jsonObject, new Response.Listener<JSONObject>()
             {
                 @Override
@@ -289,9 +265,6 @@ public class Mirrorsize_Function implements SensorEventListener {
                 }
             })
             {
-                /**
-                 * Passing some request headers
-                 */
                 @Override
                 public Map<String, String> getHeaders() {
                     HashMap<String, String> headers = new HashMap<>();
@@ -299,8 +272,7 @@ public class Mirrorsize_Function implements SensorEventListener {
                     return headers;
                 }
             };
-            // Adding request to request queue
-            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(10000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(180000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             Volley.newRequestQueue(context).add(jsonObjReq);
         }
     }
