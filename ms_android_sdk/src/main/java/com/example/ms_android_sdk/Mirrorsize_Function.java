@@ -36,7 +36,6 @@ public class Mirrorsize_Function implements SensorEventListener {
         {
             e.printStackTrace();
         }
-
         if (jsonObject.length()>0)
         {
             String api = "https://api.mysize.mirrorsize.com/api/ms_initialize_user";
