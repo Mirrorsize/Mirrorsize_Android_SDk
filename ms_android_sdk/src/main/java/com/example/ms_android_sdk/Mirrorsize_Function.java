@@ -43,8 +43,8 @@ public class Mirrorsize_Function implements SensorEventListener {
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, api, jsonObject, new Response.Listener<JSONObject>()
             {
                 @Override
-                public void onResponse(JSONObject response) {
-
+                public void onResponse(JSONObject response)
+                {
                     callBack.onSuccess(response.toString());
                 }
             }, new Response.ErrorListener()
