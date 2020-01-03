@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
 group='com.github.Mirrorsize'
 android {
     compileSdkVersion 28
@@ -7,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 4
-        versionName "2.1"
+        versionCode 5
+        versionName "2.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
