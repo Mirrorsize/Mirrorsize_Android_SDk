@@ -1,4 +1,4 @@
-package com.example.ms_android_sdk;
+package com.mirrorsize.ms_android_sdk;
 
 import org.junit.Test;
 
