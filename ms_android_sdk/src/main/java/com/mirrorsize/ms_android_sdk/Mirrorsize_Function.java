@@ -1,4 +1,4 @@
-package com.example.ms_android_sdk;
+package com.mirrorsize.ms_android_sdk;
 
 import android.content.Context;
 import android.hardware.Sensor;
@@ -36,6 +36,7 @@ public class Mirrorsize_Function implements SensorEventListener {
         {
             e.printStackTrace();
         }
+
         if (jsonObject.length()>0)
         {
             String api = "https://api.mysize.mirrorsize.com/api/ms_initialize_user";
@@ -123,6 +124,65 @@ public class Mirrorsize_Function implements SensorEventListener {
 
     }
 
+//    Latest Code for Tight Fit Measurement V2.4
+
+    public void MS_measurement_Process_tightfit_new(Context context, String userid, String angle, String height, String weight, String age, String gender, String productname, String username, String usermobile, String apikey,String frontimage, String sideimage, String merchantID, String mobilemodel,final CallBack callBack)
+    {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("userId",userid);
+            jsonObject.put("angle",angle);
+            jsonObject.put("height",height);
+            jsonObject.put("weight",weight);
+            jsonObject.put("age",age);
+            jsonObject.put("gender",gender);
+            jsonObject.put("productname",productname);
+            jsonObject.put("userName",username);
+            jsonObject.put("userMobile",usermobile);
+            jsonObject.put("apiKey",apikey);
+            jsonObject.put("frontImage",frontimage);
+            jsonObject.put("sideImage",sideimage);
+            jsonObject.put("merchantid",merchantID);
+            jsonObject.put("mobilemodel",mobilemodel);
+            jsonObject.put("fitType","tightfit");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        if (jsonObject.length() > 0)
+        {
+            String api = "https://api.mysize.mirrorsize.com/api/ms_measurement_process";
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, api, jsonObject, new Response.Listener<JSONObject>()
+            {
+                @Override
+                public void onResponse(JSONObject response) {
+                    callBack.onSuccess(response.toString());
+                }
+            }, new Response.ErrorListener()
+            {
+                @Override
+                public void onErrorResponse(VolleyError error)
+                {
+                    callBack.onError(error);
+                }
+            })
+            {
+                @Override
+                public Map<String, String> getHeaders() {
+                    HashMap<String, String> headers = new HashMap<>();
+                    headers.put("Content-Type", "application/json; charset=utf-8");
+                    return headers;
+                }
+            };
+            // Adding request to request queue
+            jsonObjReq.setRetryPolicy(new DefaultRetryPolicy(300000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            Volley.newRequestQueue(context).add(jsonObjReq);
+        }
+    }
+
+
+//    old Code
     public void MS_measurement_Process_tightfit(Context context, String userid, int angle, int height,int weight, String gender, String productname, String username, String usermobile, String apikey,String frontimage, String sideimage, String merchantID, String mobilemodel,final CallBack callBack)
     {
         JSONObject jsonObject = new JSONObject();
@@ -189,7 +249,7 @@ public class Mirrorsize_Function implements SensorEventListener {
             jsonObject.put("gender",gender);
             jsonObject.put("merchantid",merchantID);
             jsonObject.put("productname","GET_MEASURED");
-            jsonObject.put("userId",userID);
+            jsonObject.put("userID",userID);
         }
         catch (Exception e)
         {
