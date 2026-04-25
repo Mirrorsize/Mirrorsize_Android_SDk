@@ -23,5 +23,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "MSAndroidSDK"
-include ':app'
 include ':ms_android_sdk'
