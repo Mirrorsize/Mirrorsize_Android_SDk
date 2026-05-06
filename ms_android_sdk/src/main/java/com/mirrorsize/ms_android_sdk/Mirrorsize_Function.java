@@ -249,7 +249,7 @@ public class Mirrorsize_Function implements SensorEventListener {
             jsonObject.put("gender",gender);
             jsonObject.put("merchantid",merchantID);
             jsonObject.put("productname","GET_MEASURED");
-            jsonObject.put("userID",userID);
+            jsonObject.put("userId",userID);
         }
         catch (Exception e)
         {
